@@ -3,29 +3,42 @@
         .selectTable {
           border: 1px solid #000000;
           border-collapse:collapse;
+          float:left;
+        }
+        .textTable{
+            border-left:10px solid #FFFFFF;
+            border-top: 3px solid #FFFFFF;
+            border-right: 20px solid #FFFFFF;
+            border-collapse:collapse;
+            float:left;
 
         }
-
-        td{
+        .blank{
+            float:left;
+        }
+        tr td{
             border: 1px solid #000000;
             width: 20px;
             height: 20px;
+            border-collapse:collapse;
         }
+
     </style>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
     <script type="text/javascript">
         var num = 0;
-var tem ;
+        var tem;
         var h_clr;
+        
         $(document).ready(function () {
             $(".selectTable tbody td").click(function () {
                 var select = $(this);
-
+                select.id
                 var b = select.css("background-color");
                 
                 var c = rgbToHex(b[5], b[8], b[11]);
 
-                if (c === "#000000") {
+                if (c == "#000000") {
                     select.css("background-color", h_clr);
                     num++;
                 }
@@ -34,7 +47,7 @@ var tem ;
                 }
                 var h = (parseInt)(num / 6);
                 var m = ((num) % 6) * 10;
-                var time = String(h) + " Hour " + String(m) + " Minute" + c +" " + h_clr  +" "+b +" "+ tem;
+                var time = String(h) + " Hour " + String(m) + " Minute";
                 document.getElementById('print_').innerHTML = time;
             });
         });
@@ -97,7 +110,7 @@ var tem ;
                     var c = cp.barc.getImageData(0, y, 1, 1).data;
                     // r g b  순서대로 부른다.
                     cp.drawPalette(c[0], c[1], c[2]);
-tem  = c;
+                    tem  = c;
                     h_clr = rgbToHex(c[0], c[1], c[2]);
 
                 };
@@ -145,11 +158,13 @@ tem  = c;
         #palette {
             width: 256px;
             height: 256px;
+            float: right;
         }
     
         #bar {
             width: 20px;
             height: 256px;
+            float: right;
         }
     </style>
     </head>
@@ -160,8 +175,33 @@ tem  = c;
         <canvas id="bar"></canvas>
 
 <body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
-   <div id = 'print_'>  </div>
-    <table class="selectTable">
+   <div id = 'print_'>&nbsp Hour &nbsp Minute</div>
+    <table class ="textTable"  >
+        <tbody>
+            <tr>
+                <td style="width:300px;height:20px;"><input type="text" id="s1" style="width:50px;height:20px;font-size:15px;"><input type="text" id="t1"
+                        style="width:250px;height:20px;font-size:15px;"></td>
+            </tr>
+            <tr>
+                <td style="width:300px;height:20px;"><input type="text" id="s2" style="width:50px;height:20px;font-size:15px;"><input type="text" id="t2"
+                        style="width:250px;height:20px;font-size:15px;"></td>
+            </tr>
+            <tr>
+                <td style="width:300px;height:20px;"><input type="text" id="s3" style="width:50px;height:20px;font-size:15px;"><input type="text" id="t3"
+                        style="width:250px;height:20px;font-size:15px;"></td>
+            </tr>
+            <tr>
+                <td style="width:300px;height:20px;"><input type="text" id="s4" style="width:50px;height:20px;font-size:15px;"><input type="text" id="t4"
+                        style="width:250px;height:20px;font-size:15px;"></td>
+            </tr>
+            <tr>
+                <td style="width:300px;height:20px;"><input type="text" id="s5" style="width:50px;height:20px;font-size:15px;"><input type="text" id="t5"
+                        style="width:250px;height:20px;font-size:15px;"></td>
+            </tr>
+        </tbody>
+        </table>
+   
+    <table class="selectTable" >
       <tbody>
         <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
         <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
