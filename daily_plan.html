@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -53,6 +54,60 @@
             " " +
             tem;
           document.getElementById("print_").innerHTML = time;
+=======
+<html>
+    <style>
+        .selectTable {
+          border: 1px solid #000000;
+          border-collapse:collapse;
+          float:left;
+        }
+        .textTable{
+            border-left:10px solid #FFFFFF;
+            border-top: 3px solid #FFFFFF;
+            border-right: 20px solid #FFFFFF;
+            border-collapse:collapse;
+            float:left;
+
+        }
+        .blank{
+            float:left;
+        }
+        tr td{
+            border: 1px solid #000000;
+            width: 20px;
+            height: 20px;
+            border-collapse:collapse;
+        }
+
+    </style>
+    <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script type="text/javascript">
+        var num = 0;
+        var tem;
+        var h_clr;
+        
+        $(document).ready(function () {
+            $(".selectTable tbody td").click(function () {
+                var select = $(this);
+                select.id
+                var b = select.css("background-color");
+                
+                var c = rgbToHex(b[5], b[8], b[11]);
+
+                if (c == "#000000") {
+                    select.css("background-color", h_clr);
+                    num++;
+                }
+                else {
+                    select.css("background-color", h_clr);
+                }
+                var h = (parseInt)(num / 6);
+                var m = ((num) % 6) * 10;
+                var time = String(h) + " Hour " + String(m) + " Minute";
+                document.getElementById('print_').innerHTML = time;
+            });
+>>>>>>> fb09f67694a544353cd1c6242c284a80afe59b40
         });
       });
 
@@ -92,6 +147,7 @@
           var w = (bar.width = 20);
           var h = (bar.height = 256);
 
+<<<<<<< HEAD
           // 그라디언트를 불러온다.
           var grd = ctx.createLinearGradient(0, 0, w, h);
           grd.addColorStop(0, "#ff0000");
@@ -161,6 +217,107 @@
             }
             if (g > 0) {
               g--;
+=======
+        function componentToHex(c) {
+            var hex = c.toString(16);
+            return hex.length == 1 ? "0" + hex : hex;
+        }
+
+        function rgbToHex(r, g, b) {
+            return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+        }
+
+
+        var cp = {
+            bar: null, // color bar
+            barc: null, // color bar context
+            pal: null, // palette
+            palc: null, // palette context
+            pallc: null, // palette last color
+
+            // 초기화
+            init: function () {
+                // 오른쪽 바를 새로고침한다.
+                cp.initBar();
+
+                // 팔렛트를 초기화한다.
+                cp.initPalette();
+
+                // 기본값 : 빨강색 선택
+                cp.drawPalette(255, 0, 0);
+            },
+
+            // 색상바 초기화
+            initBar: function () {
+                var bar = cp.bar = document.getElementById('bar');
+                var ctx = cp.barc = bar.getContext('2d');
+
+                var w = bar.width = 20;
+                var h = bar.height = 256;
+
+                // 그라디언트를 불러온다.
+                var grd = ctx.createLinearGradient(0, 0, w, h);
+                grd.addColorStop(0, '#ff0000');
+                grd.addColorStop(0.166, '#ff00ff');
+                grd.addColorStop(0.333, '#0000ff');
+                grd.addColorStop(0.5, '#00ffff');
+                grd.addColorStop(0.666, '#00ff00');
+                grd.addColorStop(0.834, '#ffff00');
+                grd.addColorStop(1, '#ff0000');
+
+                // 지정한 그라데이션을 그린다.
+                ctx.fillStyle = grd;
+                ctx.fillRect(0, 0, w, h);
+
+                bar.onclick = function (e) {
+                    // y 좌표를 가져온다.
+                    var y = e.pageY - cp.bar.offsetTop;
+                    // 해당 위치의 색상을 가져온다.
+                    var c = cp.barc.getImageData(0, y, 1, 1).data;
+                    // r g b  순서대로 부른다.
+                    cp.drawPalette(c[0], c[1], c[2]);
+                    tem  = c;
+                    h_clr = rgbToHex(c[0], c[1], c[2]);
+
+                };
+            },
+
+            // 팔렛트를 초기화한다.
+            initPalette: function () {
+                var pal = cp.pal = document.getElementById('palette');
+                cp.palc = pal.getContext('2d');
+
+                // 이유는 모르겠지만.. 크기가 이상해서 다시 잡아준다.
+                pal.width = 256;
+                pal.height = 256;
+            },
+
+            // 팔렛트를 그린다.
+            drawPalette: function (r, g, b) {
+                // 마지막으로 선택된 컬러와 같다면 자원을 아까기위해 스킵한다.
+                var nowColor = (r + '-' + g + '-' + b);
+                if (cp.pallc == nowColor) { return; } else { cp.pallc = nowColor; }
+
+                // 팔렛트의 컨텍스를 가져옴
+                var palc = cp.palc;
+
+                // 위에서부터 1픽셀씩 내려오면서 그림
+                for (i = 0; i < 255;) {
+                    var leftColor = 255 - i; // 왼쪽 [상 -> 하] 명도 계산!
+
+                    // 그리기
+                    var grd = palc.createLinearGradient(0, 0, 256, 1);
+                    grd.addColorStop(0, 'rgb(' + leftColor + ', ' + leftColor + ', ' + leftColor + ')');
+                    grd.addColorStop(1, 'rgb(' + r + ', ' + g + ', ' + b + ')');
+                    palc.fillStyle = grd;
+                    palc.fillRect(0, i++, 256, i);
+
+                    // 위 설명대로 루프당 명도를 1씩 떨어뜨립니다.
+                    if (r > 0) { r--; }
+                    if (g > 0) { g--; }
+                    if (b > 0) { b--; }
+                }
+>>>>>>> fb09f67694a544353cd1c6242c284a80afe59b40
             }
             if (b > 0) {
               b--;
@@ -169,6 +326,7 @@
         },
       };
     </script>
+<<<<<<< HEAD
   </head>
 
   <body onload="cp.init();">
@@ -500,5 +658,87 @@
         </table>
       </div>
     </section>
+=======
+    <style>
+        #palette {
+            width: 256px;
+            height: 256px;
+            float: right;
+        }
+    
+        #bar {
+            width: 20px;
+            height: 256px;
+            float: right;
+        }
+    </style>
+    </head>
+    
+    <body onload="cp.init();">
+    
+        <canvas id="palette"></canvas>
+        <canvas id="bar"></canvas>
+
+<body oncontextmenu="return false" ondragstart="return false" onselectstart="return false">
+   <div id = 'print_'>&nbsp Hour &nbsp Minute</div>
+    <table class ="textTable"  >
+        <tbody>
+            <tr>
+                <td style="width:300px;height:20px;"><input type="text" id="s1" style="width:50px;height:20px;font-size:15px;"><input type="text" id="t1"
+                        style="width:250px;height:20px;font-size:15px;"></td>
+            </tr>
+            <tr>
+                <td style="width:300px;height:20px;"><input type="text" id="s2" style="width:50px;height:20px;font-size:15px;"><input type="text" id="t2"
+                        style="width:250px;height:20px;font-size:15px;"></td>
+            </tr>
+            <tr>
+                <td style="width:300px;height:20px;"><input type="text" id="s3" style="width:50px;height:20px;font-size:15px;"><input type="text" id="t3"
+                        style="width:250px;height:20px;font-size:15px;"></td>
+            </tr>
+            <tr>
+                <td style="width:300px;height:20px;"><input type="text" id="s4" style="width:50px;height:20px;font-size:15px;"><input type="text" id="t4"
+                        style="width:250px;height:20px;font-size:15px;"></td>
+            </tr>
+            <tr>
+                <td style="width:300px;height:20px;"><input type="text" id="s5" style="width:50px;height:20px;font-size:15px;"><input type="text" id="t5"
+                        style="width:250px;height:20px;font-size:15px;"></td>
+            </tr>
+        </tbody>
+        </table>
+   
+    <table class="selectTable" >
+      <tbody>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>
+        <tr><td>  </td><td>  </td><td>  </td><td> </td><td> </td><td> </td></tr>        
+      </tbody>
+    </table>
+
+
+    
+     
+>>>>>>> fb09f67694a544353cd1c6242c284a80afe59b40
   </body>
 </html>
