@@ -1,0 +1,57 @@
+.selectTable {
+  border: 1px solid #198754;
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid #198754;
+  width: 30px;
+  height: 30px;
+}
+.d-flex .time {
+  text-align: center;
+}
+#palette {
+  width: 128px;
+  height: 128px;
+}
+
+#bar {
+  width: 20px;
+  height: 128px;
+}
+.cont-right {
+  float: right;
+  box-sizing: border-box;
+  width: 30%;
+  padding-left: 5%;
+  margin-bottom: 10%;
+}
+.cont-left {
+  float: left;
+  box-sizing: border-box;
+  width: 70%;
+  padding-left: 5%;
+  margin-bottom: 10%;
+}
+
+.task_table {
+  margin-top: 10%;
+}
+.taskheader {
+  width: calc(100% / 7.5);
+}
+.course {
+  width: 300px;
+}
+.task {
+  width: 500px;
+}
+.check {
+  width: 100px;
+}
+
+.task_sub{
+  border: none; background: transparent;
+
+}
