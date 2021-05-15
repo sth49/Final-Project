@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Calendar</title>
+    <title>Study Mate - Calendar</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -18,21 +18,24 @@
   <body>
     <!-- 제일 윗부분 -->
     <header class="mt-2 ms-4">
-        <div class="d-flex">
+        <div class="d-flex justify-content-between">
             <h2 class="text-success">
                 <i class="bi bi-calendar-check"></i>
-                <span class = "font-monospace">Calendar</span>
+                <span class = "font-monospace">STUDY MATE</span>
             </h2>
             <div class="d-flex mt-1 ms-3">
               <button type ="button" class = "prev btn btn-outline-success btn-sm ms-1">&#60</button>
-              <button  type ="button" class = "next btn btn-outline-success btn-sm ms-1">&#62</button> 
               <span class="current-year-month text-success fs-4 font-monospace container-sm"></span>
+              <button  type ="button" class = "next btn btn-outline-success btn-sm ms-1">&#62</button> 
+              
             </div>
+            <button type="button" class="btn btn-outline-success fs-5 font-monospace" onclick="location.href='daily_plan.html'">Study Planner!</button>
         </div>
     </header>
     <!-- 오른쪽 -->
     <section class="content-right mb-2">
       <div class="right-main">
+        
         <div class="main-wrap">
           <div class="main-day"></div>
           <div class="main-date"></div>
@@ -68,8 +71,7 @@
     </section>
     <script>
 
-let DATA = {
-};
+let DATA = []; // 모든 데이터 저장
 
 Date.prototype.format = function () {
   var yyyy = this.getFullYear();

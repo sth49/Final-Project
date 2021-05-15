@@ -1,6 +1,7 @@
 # Study Mate v1
 
 This is our final project of Open-Source Software Practice.
+Study Mate is a desktop application that records and manages your tasks efficiently.
 
 ## Motivation
 
