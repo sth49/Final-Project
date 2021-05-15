@@ -1,4 +1,4 @@
-# W.A.S.P. - Web Application version Study Planner
+# Study Mate v1
 
 This is our final project of Open-Source Software Practice.
 
