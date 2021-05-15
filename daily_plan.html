@@ -1,14 +1,9 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> c164c27bdb0969e7f56bf9287651816dcfa0e0ec
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Daily_plan</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-<<<<<<< HEAD
 
     <!-- Bootstrap CSS -->
     <link
@@ -37,6 +32,8 @@
 
           var c = rgbToHex(b[5], b[8], b[11]);
 
+
+      
           if (c === "#000000") {
             select.css("background-color", h_clr);
             num++;
@@ -45,221 +42,16 @@
           }
           var h = parseInt(num / 6);
           var m = (num % 6) * 10;
+
           var time =
             String(h) +
             " Hour " +
             String(m) +
-            " Minute" +
-            c +
-            " " +
-            h_clr +
-            " " +
-            b +
-            " " +
-            tem;
-          document.getElementById("print_").innerHTML = time;
-=======
-<html>
-    <style>
-        .selectTable {
-          border: 1px solid #000000;
-          border-collapse:collapse;
-          float:left;
-        }
-        .textTable{
-            border-left:10px solid #FFFFFF;
-            border-top: 3px solid #FFFFFF;
-            border-right: 20px solid #FFFFFF;
-            border-collapse:collapse;
-            float:left;
-=======
->>>>>>> c164c27bdb0969e7f56bf9287651816dcfa0e0ec
-
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
-    />
-
-    <link rel="stylesheet" href="style_daily_plan.css" />
-
-    <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
-    <script type="text/javascript">
-<<<<<<< HEAD
-        var num = 0;
-        var tem;
-        var h_clr;
-        
-        $(document).ready(function () {
-            $(".selectTable tbody td").click(function () {
-                var select = $(this);
-                select.id
-                var b = select.css("background-color");
-                
-                var c = rgbToHex(b[5], b[8], b[11]);
-
-                if (c == "#000000") {
-                    select.css("background-color", h_clr);
-                    num++;
-                }
-                else {
-                    select.css("background-color", h_clr);
-                }
-                var h = (parseInt)(num / 6);
-                var m = ((num) % 6) * 10;
-                var time = String(h) + " Hour " + String(m) + " Minute";
-                document.getElementById('print_').innerHTML = time;
-            });
->>>>>>> fb09f67694a544353cd1c6242c284a80afe59b40
-        });
-      });
-
-      function componentToHex(c) {
-        var hex = c.toString(16);
-        return hex.length == 1 ? "0" + hex : hex;
-      }
-
-      function rgbToHex(r, g, b) {
-        return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-      }
-
-      var cp = {
-        bar: null, // color bar
-        barc: null, // color bar context
-        pal: null, // palette
-        palc: null, // palette context
-        pallc: null, // palette last color
-
-        // 초기화
-        init: function () {
-          // 오른쪽 바를 새로고침한다.
-          cp.initBar();
-
-          // 팔렛트를 초기화한다.
-          cp.initPalette();
-
-          // 기본값 : 빨강색 선택
-          cp.drawPalette(255, 0, 0);
-        },
-
-        // 색상바 초기화
-        initBar: function () {
-          var bar = (cp.bar = document.getElementById("bar"));
-          var ctx = (cp.barc = bar.getContext("2d"));
-
-          var w = (bar.width = 20);
-          var h = (bar.height = 256);
-
-<<<<<<< HEAD
-          // 그라디언트를 불러온다.
-          var grd = ctx.createLinearGradient(0, 0, w, h);
-          grd.addColorStop(0, "#ff0000");
-          grd.addColorStop(0.166, "#ff00ff");
-          grd.addColorStop(0.333, "#0000ff");
-          grd.addColorStop(0.5, "#00ffff");
-          grd.addColorStop(0.666, "#00ff00");
-          grd.addColorStop(0.834, "#ffff00");
-          grd.addColorStop(1, "#ff0000");
-
-          // 지정한 그라데이션을 그린다.
-          ctx.fillStyle = grd;
-          ctx.fillRect(0, 0, w, h);
-
-          bar.onclick = function (e) {
-            // y 좌표를 가져온다.
-            var y = e.pageY - cp.bar.offsetTop;
-            // 해당 위치의 색상을 가져온다.
-            var c = cp.barc.getImageData(0, y, 1, 1).data;
-            // r g b  순서대로 부른다.
-            cp.drawPalette(c[0], c[1], c[2]);
-            tem = c;
-            h_clr = rgbToHex(c[0], c[1], c[2]);
-          };
-        },
-
-        // 팔렛트를 초기화한다.
-        initPalette: function () {
-          var pal = (cp.pal = document.getElementById("palette"));
-          cp.palc = pal.getContext("2d");
-
-          // 이유는 모르겠지만.. 크기가 이상해서 다시 잡아준다.
-          pal.width = 256;
-          pal.height = 256;
-        },
-
-        // 팔렛트를 그린다.
-        drawPalette: function (r, g, b) {
-          // 마지막으로 선택된 컬러와 같다면 자원을 아까기위해 스킵한다.
-          var nowColor = r + "-" + g + "-" + b;
-          if (cp.pallc == nowColor) {
-            return;
-          } else {
-            cp.pallc = nowColor;
-          }
-
-          // 팔렛트의 컨텍스를 가져옴
-          var palc = cp.palc;
-
-          // 위에서부터 1픽셀씩 내려오면서 그림
-          for (i = 0; i < 255; ) {
-            var leftColor = 255 - i; // 왼쪽 [상 -> 하] 명도 계산!
-
-            // 그리기
-            var grd = palc.createLinearGradient(0, 0, 256, 1);
-            grd.addColorStop(
-              0,
-              "rgb(" + leftColor + ", " + leftColor + ", " + leftColor + ")"
-            );
-            grd.addColorStop(1, "rgb(" + r + ", " + g + ", " + b + ")");
-            palc.fillStyle = grd;
-            palc.fillRect(0, i++, 256, i);
-
-            // 위 설명대로 루프당 명도를 1씩 떨어뜨립니다.
-            if (r > 0) {
-              r--;
-            }
-            if (g > 0) {
-              g--;
-=======
-        function componentToHex(c) {
-            var hex = c.toString(16);
-            return hex.length == 1 ? "0" + hex : hex;
-        }
-=======
-      var num = 0;
-      var tem;
-      var h_clr;
-      $(document).ready(function () {
-        $(".selectTable tbody td").click(function () {
-          var select = $(this);
-
-          var b = select.css("background-color");
->>>>>>> c164c27bdb0969e7f56bf9287651816dcfa0e0ec
-
-          var c = rgbToHex(b[5], b[8], b[11]);
-
-          if (c === "#000000") {
-            select.css("background-color", h_clr);
-            num++;
-          } else {
-            select.css("background-color", h_clr);
-          }
-          var h = parseInt(num / 6);
-          var m = (num % 6) * 10;
-          var time =
-            String(h) +
-            " Hour " +
-            String(m) +
-            " Minute" ;
+            " Minute" +c +b;
           document.getElementById("print_").innerHTML = time;
 
         });
+
       });
     
       function componentToHex(c) {
@@ -270,7 +62,7 @@
       function rgbToHex(r, g, b) {
         return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
       }
-
+// 버튼 구현 컬러칩 태그 
       var cp = {
             bar: null, // color bar
             barc: null, // color bar context
@@ -360,353 +152,11 @@
                     if (g > 0) { g--; }
                     if (b > 0) { b--; }
                 }
->>>>>>> fb09f67694a544353cd1c6242c284a80afe59b40
             }
-            if (b > 0) {
-              b--;
-            }
-<<<<<<< HEAD
-          }
-        },
-      };
-=======
         };
 
->>>>>>> c164c27bdb0969e7f56bf9287651816dcfa0e0ec
     </script>
-<<<<<<< HEAD
-  </head>
 
-  <body onload="cp.init();">
-    <header class="mt-2 ms-4">
-      <div class="d-flex">
-        <h2 class="text-success">
-          <i class="bi bi-calendar-check"></i>
-          <span class="font-monospace">Study Planner</span>
-        </h2>
-        <div class="d-flex mt-1 ms-3"></div>
-      </div>
-    </header>
-    <section class="cont-left">
-      <div class="task_table">
-        <table class="table table-striped table-success">
-          <thead>
-            <tr class="table-success">
-              <th scope="col font-monospace">#</th>
-              <th scope="col" class="course font-monospace">course</th>
-              <th scope="col" class="task font-monospace">task</th>
-              <th scope="col" class="check font-monospace">state</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="table-success">
-              <th scope="row">1</th>
-              <td class="table-success">Mark</td>
-              <td class="table-success">Otto</td>
-              <td class="table-success">@mdo</td>
-            </tr>
-            <tr class="table-success">
-              <th scope="row">2</th>
-              <td class="table-success">Jacob</td>
-              <td class="table-success">Thornton</td>
-              <td class="table-success">@fat</td>
-            </tr>
-            <tr class="table-success">
-              <th scope="row">3</th>
-              <td colspan="2" class="table-success">Larry the Bird</td>
-              <td class="table-success">@twitter</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-    <section class="cont-right">
-      <canvas id="palette"></canvas>
-      <canvas id="bar"></canvas>
-
-      <div id="print_"></div>
-      <div class="d-flex">
-        <table class="time font-monospace">
-          <tr>
-            <td>6</td>
-          </tr>
-          <tr>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>8</td>
-          </tr>
-          <tr>
-            <td>9</td>
-          </tr>
-          <tr>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td>11</td>
-          </tr>
-          <tr>
-            <td>12</td>
-          </tr>
-          <tr>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td>5</td>
-          </tr>
-          <tr>
-            <td>6</td>
-          </tr>
-          <tr>
-            <td>7</td>
-          </tr>
-          <tr>
-            <td>8</td>
-          </tr>
-          <tr>
-            <td>9</td>
-          </tr>
-          <tr>
-            <td>10</td>
-          </tr>
-          <tr>
-            <td>11</td>
-          </tr>
-          <tr>
-            <td>12</td>
-          </tr>
-          <tr>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>2</td>
-          </tr>
-          <tr>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>4</td>
-          </tr>
-          <tr>
-            <td>5</td>
-          </tr>
-        </table>
-        <table class="selectTable">
-          <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-=======
     <style>
         #palette {
             width: 256px;
@@ -733,6 +183,7 @@
         </h2>
         <div class="d-flex mt-1 ms-3"></div>
       </div>
+
     </header>
 
 
@@ -740,29 +191,30 @@
       <div class="task_table">
         <table class="table table-striped table-success">
           <thead>
-            <tr class="table-success">
-              <th scope="col font-monospace">#</th>
-              <th scope="col" class="course font-monospace">course</th>
+            <tr class="table-success" >
+              <th scope="col font-monospace"></th>
+              
               <th scope="col" class="task font-monospace">task</th>
-              <th scope="col" class="check font-monospace">state</th>
+              <th scope="col" class="check font-monospace">color</th>
             </tr>
           </thead>
+          <!--Todo list 구현해서-->
           <tbody>
             <tr class="table-success">
-              <th scope="row">1</th>
-              <td class="table-success"><input type="text" style="border: none; background: transparent;"> </td>
-              <td class="table-success"><input type="text" style="border: none; background: transparent;"></td>
-              <td class="table-success"></td>
+              <th scope="row">1</th>            
+              <td class="table-success"><input type="text" style="border: none; background: transparent;">
+              <!-- 입력 받을때마다 해당 구조체 찾아서--></td>
+              <td class="table-success"> <!--특정컬러--> </td>
             </tr>
             <tr class="table-success">
               <th scope="row">2</th>
-              <td class="table-success"><input type="text" style="border: none; background: transparent;"> </td>
+            
               <td class="table-success"><input type="text" style="border: none; background: transparent;"></td>
               <td class="table-success"></td>
             </tr>
             <tr class="table-success">
               <th scope="row">3</th>
-              <td class="table-success"><input type="text" style="border: none; background: transparent;"> </td>
+              
               <td class="table-success"><input type="text" style="border: none; background: transparent;"></td>
               <td class="table-success"></td>
             </tr>
@@ -1043,14 +495,7 @@
               <td></td>
               <td></td>
             </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
+          
           </tbody>
         </table>
       </div>
@@ -1060,14 +505,11 @@
     
     <body onload="cp.init();">
     
-        <canvas id="palette"></canvas>
-        <canvas id="bar"></canvas></body>
-
+        
 
    
 
     
      
->>>>>>> fb09f67694a544353cd1c6242c284a80afe59b40
   </body>
 </html>
