@@ -50,11 +50,8 @@ td {
 .check {
   width: 100px;
 }
-<<<<<<< HEAD
-=======
 
-.task_sub{
-  border: none; background: transparent;
-
+.task_sub {
+  border: none;
+  background: transparent;
 }
->>>>>>> c164c27bdb0969e7f56bf9287651816dcfa0e0ec

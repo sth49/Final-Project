@@ -16,7 +16,6 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
     />
-   
 
     <link rel="stylesheet" href="style_daily_plan.css" />
 
@@ -31,8 +30,7 @@
       var tem;
       var h_clr;
       $(document).ready(function () {
-
-        $(".colorchip tr td").click(function (){
+        $(".colorchip tr td").click(function () {
           h_clr = $(this).css("background-color");
         });
 
@@ -43,8 +41,6 @@
 
           var c = rgbToHex(b[5], b[8], b[11]);
 
-
-      
           if (c === "#000000") {
             select.css("background-color", h_clr);
             num++;
@@ -54,13 +50,11 @@
           var h = parseInt(num / 6);
           var m = (num % 6) * 10;
 
-          var time = String(h) + " Hour " + String(m) +  " Minute" ;
+          var time = String(h) + " Hour " + String(m) + " Minute";
           document.getElementById("print_").innerHTML = time;
-
         });
-
       });
-    
+
       function componentToHex(c) {
         var hex = c.toString(16);
         return hex.length == 1 ? "0" + hex : hex;
@@ -69,22 +63,17 @@
       function rgbToHex(r, g, b) {
         return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
       }
-
-
     </script>
 
     <style>
-       
       .container {
         width: 640px;
         float: left;
       }
-
     </style>
   </head>
 
   <body>
-
     <header class="mt-2 ms-4">
       <div class="d-flex">
         <h2 class="text-success">
@@ -93,73 +82,230 @@
         </h2>
         <div class="d-flex mt-1 ms-3"></div>
       </div>
-
     </header>
-    
-    
-    
-    <table class = "colorchip">
-      <tr>
-        <td  style="background-color: #faf1d6"></td>
-        <td  style="background-color: #fdafab"></td>
-        <td  style="background-color: #fadee1"></td>
-        <td  style="background-color: #d9f1f1"></td>
-        <td  style="background-color: #b6e3e9"></td>
-        <td  style="background-color: #d2e9e1"></td>
-        <td  style="background-color: #fbedc9"></td>
-        <td  style="background-color: #fcb6d0"></td>
-        <td  style="background-color: #ffdee1"></td>
-      </tr>
+    <section class="cont-left">
+      <div class="container">
+        <div class="d-flex align-items-center mb-2 mt-2">
+          <input
+            type="text"
+            class="form-control font-monospace"
+            id="task-input"
+            placeholder="Enter a task here"
+            onkeypress="if(event.keyCode == 13) enter();"
+          />
+          <button
+            type="button"
+            id="add"
+            class="btn btn-primary ms-1 text-nowrap"
+          >
+            <i class="bi bi-plus font-monospace"></i> Add
+          </button>
+        </div>
 
-      <tr>
-        <td  style="background-color: #29e38d"></td>
-        <td  style="background-color: #29e34e"></td>
-        <td  style="background-color: #45bf5d"></td>  
-      </tr>
-    </table>
-
-
-
-
-
-  <!--  <section class="cont-left">
-      <div class="task_table">
-        <table class="table table-striped table-success">
-          <thead>
-            <tr class="table-success" >
-              <th scope="col font-monospace"></th>
-              
-              <th scope="col" class="task font-monospace">task</th>
-              <th scope="col" class="check font-monospace">color</th>
-            </tr>
-          </thead>
-        
-          <tbody>
-            <tr class="table-success">
-              <th scope="row">1</th>            
-              <td class="table-success"><input type="text" style="border: none; background: transparent;">
-             </td>
-              <td class="table-success"> </td>
-            </tr>
-            <tr class="table-success">
-              <th scope="row">2</th>
-            
-              <td class="table-success"><input type="text" style="border: none; background: transparent;"></td>
-              <td class="table-success"></td>
-            </tr>
-            <tr class="table-success">
-              <th scope="row">3</th>
-              
-              <td class="table-success"><input type="text" style="border: none; background: transparent;"></td>
-              <td class="table-success"></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="d-flex">
+          <div class="flex-grow-1 bg-light rounded-2 p-2 me-1">
+            <h3 class="font-monospace">Todos</h3>
+            <div id="todo-list">
+              <div
+                class="
+                  task
+                  bg-light
+                  p-1
+                  rounded-2
+                  ps-2
+                  d-flex
+                  align-items-center
+                  font-monospace
+                "
+              ></div>
+            </div>
+          </div>
+          <!---->
+          <div class="flex-grow-1 bg-light rounded-2 p-2">
+            <h3 class="font-monospace">Done</h3>
+            <div id="done-list">
+              <div
+                class="
+                  task
+                  bg-light
+                  p-1
+                  rounded-2
+                  ps-2
+                  d-flex
+                  align-items-center
+                  font-monospace
+                "
+              ></div>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>-->
-    
+    </section>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+      crossorigin="anonymous"
+    ></script>
+
+    <script>
+      const Type = {
+        Todo: 1,
+        Done: 2,
+      };
+
+      let tasks = [];
+
+      function loadTasks() {
+        let lastTasks = localStorage.getItem("tasks");
+        if (!lastTasks) return;
+
+        tasks = JSON.parse(lastTasks);
+        tasks.forEach(addToList);
+      }
+
+      function saveTasks() {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
+
+      function addDone(task) {
+        let div = document.createElement("div");
+        div.className =
+          "task bg-light p-1 rounded-2 ps-2 d-flex align-items-center font-monospace";
+
+        let span = document.createElement("span");
+        span.className = "me-auto";
+        span.textContent = task.text;
+        div.appendChild(span);
+        let buttonRemove = document.createElement("button");
+        buttonRemove.className = "btn btn-sm btn-danger";
+        buttonRemove.innerHTML = '<i class="bi bi-x"></i>';
+        div.appendChild(buttonRemove);
+
+        buttonRemove.addEventListener("click", () => {
+          div.remove();
+          tasks = tasks.filter((t) => t !== task);
+          saveTasks();
+        });
+
+        let list = document.querySelector(
+          task.type === Type.Todo ? "#todo-list" : "#done-list"
+        );
+        list.appendChild(div);
+      }
+      function addToList(task) {
+        let div = document.createElement("div");
+        div.className =
+          "task bg-light p-1 rounded-2 ps-2 d-flex align-items-center font-monospace";
+
+        let span = document.createElement("span");
+        span.className = "me-auto";
+        span.textContent = task.text;
+        div.appendChild(span);
+
+        if (task.type === Type.Todo) {
+          let buttonDone = document.createElement("button");
+          buttonDone.className = "btn btn-sm btn-success me-1";
+          buttonDone.innerHTML = '<i class="bi bi-check"></i>';
+          div.appendChild(buttonDone);
+
+          buttonDone.addEventListener("click", () => {
+            /* TODO */
+
+            tasks = tasks.filter((t) => t !== task);
+            task.type = Type.Done;
+            tasks.push(task);
+            addDone(task);
+            div.remove();
+
+            saveTasks();
+          });
+        }
+
+        let buttonRemove = document.createElement("button");
+        buttonRemove.className = "btn btn-sm btn-danger";
+        buttonRemove.innerHTML = '<i class="bi bi-x"></i>';
+        div.appendChild(buttonRemove);
+
+        buttonRemove.addEventListener("click", () => {
+          div.remove();
+          tasks = tasks.filter((t) => t !== task);
+          saveTasks();
+        });
+
+        let list = document.querySelector(
+          task.type === Type.Todo ? "#todo-list" : "#done-list"
+        );
+        list.appendChild(div);
+      }
+
+      window.addEventListener("load", () => {
+        loadTasks();
+      });
+
+      function enter() {
+        let input = document.querySelector("#task-input");
+        let text = input.value;
+
+        if (!text.length) return;
+
+        let task = {
+          text: text,
+          type: Type.Todo,
+        };
+
+        tasks.push(task);
+        saveTasks();
+
+        addToList(task);
+
+        input.value = "";
+      }
+      let button = document.querySelector("#add");
+      button.addEventListener("click", () => {
+        // 1. Read the text in #task-input.
+        let input = document.querySelector("#task-input");
+        let text = input.value;
+
+        if (!text.length) return;
+
+        // 2. Create a new Task object.
+        let task = {
+          text: text,
+          type: Type.Todo,
+        };
+
+        // 3. Append the new Task object to tasks
+        tasks.push(task);
+        saveTasks();
+
+        // 4. Create a new task item and attach it to #todo-list.
+        addToList(task);
+
+        // 5. Clear #task-input.
+        input.value = "";
+      });
+    </script>
     <section class="cont-right">
-      
+      <table class="colorchip">
+        <tr>
+          <td style="background-color: #faf1d6"></td>
+          <td style="background-color: #fdafab"></td>
+          <td style="background-color: #fadee1"></td>
+          <td style="background-color: #d9f1f1"></td>
+          <td style="background-color: #b6e3e9"></td>
+          <td style="background-color: #d2e9e1"></td>
+          <td style="background-color: #fbedc9"></td>
+          <td style="background-color: #fcb6d0"></td>
+          <td style="background-color: #ffdee1"></td>
+        </tr>
+
+        <tr>
+          <td style="background-color: #29e38d"></td>
+          <td style="background-color: #29e34e"></td>
+          <td style="background-color: #45bf5d"></td>
+        </tr>
+      </table>
       <div id="print_"></div>
 
       <div class="d-flex">
@@ -431,198 +577,9 @@
               <td></td>
               <td></td>
             </tr>
-          
           </tbody>
         </table>
       </div>
     </section>
-    
-
-    
-  
-   <!-- <nav class="navbar navbar-light bg-light">
-      <div class="container">
-        <span class="navbar-brand mb-0 h1"
-          ><i class="bi bi-card-checklist"></i> SKKU-Todo</span
-        >
-      </div>
-    </nav>-->
-
-
-    <div class="container">
-      <div class="d-flex align-items-center mb-2 mt-2">
-        <input
-          type="text"
-          class="form-control"
-          id="task-input"
-          placeholder="Enter a task here"
-          onkeypress="if(event.keyCode == 13) enter();"
-        />
-        <button type="button" id="add" class="btn btn-primary ms-1 text-nowrap">
-          <i class="bi bi-plus"></i> Add
-        </button>
-      </div>
-
-      <div class="d-flex">
-        <div class="flex-grow-1 bg-light rounded-2 p-2 me-1 w-50">
-          <h3>Todos</h3>
-          <div id="todo-list">
-            <div
-              class="task bg-light p-1 rounded-2 ps-2 d-flex align-items-center"
-            ></div>
-          </div>
-        </div>
-        <div class="flex-grow-1 bg-light rounded-2 p-2 w-50">
-          <h3>Done</h3>
-          <div id="done-list">
-            <div
-              class="task bg-light p-1 rounded-2 ps-2 d-flex align-items-center"
-            ></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  
-
-    <script>
-      const Type = {
-        Todo: 1,
-        Done: 2,
-      };
-
-      let tasks = [];
-
-      function loadTasks() {
-        let lastTasks = localStorage.getItem("tasks");
-        if (!lastTasks) return;
-
-        tasks = JSON.parse(lastTasks);
-        tasks.forEach(addToList);
-      }
-
-      function saveTasks() {
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-      }
-
-      function addDone(task) {
-        let div = document.createElement("div");
-        div.className =
-          "task bg-light p-1 rounded-2 ps-2 d-flex align-items-center";
-
-        let span = document.createElement("span");
-        span.className = "me-auto";
-        span.textContent = task.text;
-        div.appendChild(span);
-        let buttonRemove = document.createElement("button");
-        buttonRemove.className = "btn btn-sm btn-danger";
-        buttonRemove.innerHTML = '<i class="bi bi-x"></i>';
-        div.appendChild(buttonRemove);
-
-        buttonRemove.addEventListener("click", () => {
-          div.remove();
-          tasks = tasks.filter((t) => t !== task);
-          saveTasks();
-        });
-
-        let list = document.querySelector(
-          task.type === Type.Todo ? "#todo-list" : "#done-list"
-        );
-        list.appendChild(div);
-      }
-      function addToList(task) {
-        let div = document.createElement("div");
-        div.className =
-          "task bg-light p-1 rounded-2 ps-2 d-flex align-items-center";
-
-        let span = document.createElement("span");
-        span.className = "me-auto";
-        span.textContent = task.text;
-        div.appendChild(span);
-
-        if (task.type === Type.Todo) {
-          let buttonDone = document.createElement("button");
-          buttonDone.className = "btn btn-sm btn-success me-1";
-          buttonDone.innerHTML = '<i class="bi bi-check"></i>';
-          div.appendChild(buttonDone);
-
-          buttonDone.addEventListener("click", () => {
-            /* TODO */
-
-            tasks = tasks.filter((t) => t !== task);
-            task.type = Type.Done;
-            tasks.push(task);
-            addDone(task);
-            div.remove();
-
-            saveTasks();
-          });
-        }
-
-        let buttonRemove = document.createElement("button");
-        buttonRemove.className = "btn btn-sm btn-danger";
-        buttonRemove.innerHTML = '<i class="bi bi-x"></i>';
-        div.appendChild(buttonRemove);
-
-        buttonRemove.addEventListener("click", () => {
-          div.remove();
-          tasks = tasks.filter((t) => t !== task);
-          saveTasks();
-        });
-
-        let list = document.querySelector(
-          task.type === Type.Todo ? "#todo-list" : "#done-list"
-        );
-        list.appendChild(div);
-      }
-
-      window.addEventListener("load", () => {
-        loadTasks();
-      });
-
-      function enter() {
-        let input = document.querySelector("#task-input");
-        let text = input.value;
-
-        if (!text.length) return;
-
-        let task = {
-          text: text,
-          type: Type.Todo,
-        };
-
-        tasks.push(task);
-        saveTasks();
-
-        addToList(task);
-
-        input.value = "";
-      }
-      let button = document.querySelector("#add");
-      button.addEventListener("click", () => {
-        // 1. Read the text in #task-input.
-        let input = document.querySelector("#task-input");
-        let text = input.value;
-
-        if (!text.length) return;
-
-        // 2. Create a new Task object.
-        let task = {
-          text: text,
-          type: Type.Todo,
-        };
-
-        // 3. Append the new Task object to tasks
-        tasks.push(task);
-        saveTasks();
-
-        // 4. Create a new task item and attach it to #todo-list.
-        addToList(task);
-
-        // 5. Clear #task-input.
-        input.value = "";
-      });
-    </script>
   </body>
-
 </html>
