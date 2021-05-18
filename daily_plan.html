@@ -29,6 +29,7 @@
       var num = 0;
       var tem;
       var h_clr;
+      
       $(document).ready(function () {
         $(".colorchip tr td").click(function () {
           h_clr = $(this).css("background-color");
@@ -75,11 +76,21 @@
 
   <body>
     <header class="mt-2 ms-4">
+      
       <div class="d-flex">
         <h2 class="text-success">
           <i class="bi bi-calendar-check"></i>
           <span class="font-monospace">Study Planner</span>
         </h2>
+
+
+        <div class="d-flex mt-1 ms-3">
+        <button type ="button" class = "prev btn btn-outline-success btn-sm ms-1">&#60</button>
+        <!--<span class="current-year-month text-success fs-4 font-monospace container-sm"></span>-->
+        <button  type ="button" class = "next btn btn-outline-success btn-sm ms-1">&#62</button> 
+        </div>
+
+      </div>
         <div class="d-flex mt-1 ms-3"></div>
       </div>
     </header>
@@ -96,7 +107,9 @@
           <button
             type="button"
             id="add"
-            class="btn btn-primary ms-1 text-nowrap"
+            class="btn ms-1 text-nowrap"
+            style="background: #198754; color: white;"
+
           >
             <i class="bi bi-plus font-monospace"></i> Add
           </button>
@@ -293,14 +306,15 @@
           <td style="background-color: #fdafab"></td>
           <td style="background-color: #fadee1"></td>
           <td style="background-color: #d9f1f1"></td>
-          <td style="background-color: #b6e3e9"></td>
+          <td style="background-color: #b6e3e9"></td></tr><tr>
           <td style="background-color: #d2e9e1"></td>
           <td style="background-color: #fbedc9"></td>
           <td style="background-color: #fcb6d0"></td>
           <td style="background-color: #ffdee1"></td>
+          <td style="background-color: #dadafc"></td>
         </tr>
       </table>
-      <div id="print_"></div>
+      <div id="print_" class="font-monospace" style="color :#198754 ; font-weight:bold; font-size: large;">Hour Minute</div>
 
       <div class="d-flex">
         <table class="time font-monospace">
