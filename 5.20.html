@@ -66,7 +66,7 @@
     <script>
         /* Set the width of the side navigation to 250px */
         function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("mySidenav").style.width = "200px";
         }
 
         /* Set the width of the side navigation to 0 */
@@ -291,8 +291,8 @@
     <section class="cont-right">
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <span>pallete</span>
-            <table class="colorchip" style="padding-left: 20px;">
+            <span class="font-monospace" style="color :#198754 ; font-weight:bold; font-size: large; margin: 20px; "> Pastel Pallete</span>
+            <table class="colorchip" style="margin-left: 20px;">
                 <tr>
                     <td style="background-color: #faf1d6"></td>
                     <td style="background-color: #fdafab"></td>
@@ -311,7 +311,7 @@
         </div>
 
         <!-- Use any element to open the sidenav -->
-        <button type="button" class="btn btn-outline-success fs-5 font-monospace" onclick="openNav()">Open Pallete</button>
+
         <!--<table class="colorchip">
         <tr>
           <td style="background-color: #faf1d6"></td>
@@ -326,8 +326,11 @@
           <td style="background-color: #dadafc"></td>
         </tr>
       </table>-->
-        <div id="print_" class="font-monospace" style="color :#198754 ; font-weight:bold; font-size: large;">Hour Minute
-        </div>
+      <div id="print_" class="font-monospace" style="color :#198754 ; font-weight:bold; font-size: 25px; margin-left: 10px">Hour
+        Minute </div>
+
+        <button type="button" class="btn btn-outline-success fs-5 font-monospace" style="margin: 10px ; margin-left: 50px"
+            onclick="openNav()">Open Pallete</button>
 
         <div class="d-flex">
             <table class="time font-monospace">
