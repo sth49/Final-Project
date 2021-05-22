@@ -29,13 +29,14 @@
               <button  type ="button" class = "next btn btn-outline-success btn-sm ms-1">&#62</button> 
               
             </div>
-            <button type="button" class="btn btn-outline-success fs-5 font-monospace" onclick="location.href='daily_plan.html'">Study Planner!</button>
+            <!-- 
+            <button type="button" class="btn btn-outline-success fs-5 font-monospace" onclick="location.href='daily_plan.html'">Study Planner!</button>오른쪽 -->
         </div>
     </header>
     <!-- 오른쪽 -->
     <section class="content-right mb-2">
       <div class="right-main">
-        
+        <button class="planner_button btn btn-success">Daily</button>
         <div class="main-wrap">
           <div class="main-day"></div>
           <div class="main-date"></div>
@@ -50,7 +51,7 @@
           <div class="showList">
             <span class="listText"></span>
             <span class="createDate"></span>
-            <button class="closed">close</button>
+            
           </div>
           <div class="bgblack"></div>
         </div>
@@ -100,7 +101,8 @@ Date.prototype.format2 = function () {
   const listText = document.querySelector(".listText");
   const createDate = document.querySelector(".createDate");
   const bgblack = document.querySelector(".bgblack");
-  const closedBtn = document.querySelector(".closed");
+  
+  const plannerBtn = document.querySelector(".planner_button");
   let currentDate;
   const monthList = [
       "January",
@@ -241,6 +243,13 @@ Date.prototype.format2 = function () {
 
     insertTodo(inputValue);
   });
+  plannerBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    let split_date = currentDate.split('-');
+    let address = split_date[1]+'.'+split_date[2]+".html";
+    window.location.href = address;
+
+  });
 
   function insertTodo(text) {
     let todoObj = {
@@ -344,10 +353,6 @@ Date.prototype.format2 = function () {
     createDate.textContent = currentDate;
   }
 
-  closedBtn.addEventListener("click", function (e) {
-    showList.style.display = "none";
-    bgblack.style.display = "none";
-  });
 
   function save() {
     localStorage.setItem(currentDate, JSON.stringify(DATA[currentDate]));
