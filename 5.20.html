@@ -156,18 +156,18 @@
             Done: 2,
         };
 
-        let tasks = [];
+        let tasks_20 = [];
 
         function loadTasks() {
-            let lastTasks = localStorage.getItem("tasks");
+            let lastTasks = localStorage.getItem("tasks_20");
             if (!lastTasks) return;
 
-            tasks = JSON.parse(lastTasks);
-            tasks.forEach(addToList);
+            tasks_20 = JSON.parse(lastTasks);
+            tasks_20.forEach(addToList);
         }
 
         function saveTasks() {
-            localStorage.setItem("tasks", JSON.stringify(tasks));
+            localStorage.setItem("tasks_20", JSON.stringify(tasks_20));
         }
 
         function addDone(task) {
@@ -186,7 +186,7 @@
 
             buttonRemove.addEventListener("click", () => {
                 div.remove();
-                tasks = tasks.filter((t) => t !== task);
+                tasks_20 = tasks_20.filter((t) => t !== task);
                 saveTasks();
             });
 
@@ -214,9 +214,9 @@
                 buttonDone.addEventListener("click", () => {
                     /* TODO */
 
-                    tasks = tasks.filter((t) => t !== task);
+                    tasks_20 = tasks_20.filter((t) => t !== task);
                     task.type = Type.Done;
-                    tasks.push(task);
+                    tasks_20.push(task);
                     addDone(task);
                     div.remove();
 
@@ -231,7 +231,7 @@
 
             buttonRemove.addEventListener("click", () => {
                 div.remove();
-                tasks = tasks.filter((t) => t !== task);
+                tasks_20 = tasks_20.filter((t) => t !== task);
                 saveTasks();
             });
 
@@ -256,7 +256,7 @@
                 type: Type.Todo,
             };
 
-            tasks.push(task);
+            tasks_20.push(task);
             saveTasks();
 
             addToList(task);
@@ -278,7 +278,7 @@
             };
 
             // 3. Append the new Task object to tasks
-            tasks.push(task);
+            tasks_20.push(task);
             saveTasks();
 
             // 4. Create a new task item and attach it to #todo-list.
