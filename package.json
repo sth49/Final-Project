@@ -1,0 +1,24 @@
+{
+  "name": "final-project",
+  "version": "1.0.0",
+  "description": "This is our final project of Open-Source Software Practice.\r Study Mate is a desktop application that records and manages your tasks efficiently.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sth49/Final-Project.git"
+  },
+  "author": "team23",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sth49/Final-Project/issues"
+  },
+  "homepage": "https://github.com/sth49/Final-Project#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "^12.0.9"
+  },
+  "keywords": []
+}
