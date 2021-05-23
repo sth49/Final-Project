@@ -21,11 +21,11 @@
     <script type="text/javascript">
         var num = 0;
         var tem;
-        var h_clr;
+        var h_clr_22;
 
         $(document).ready(function () {
             $(".colorchip tr td").click(function () {
-                h_clr = $(this).css("background-color");
+                h_clr_22 = $(this).css("background-color");
             });
 
             $(".selectTable tbody td").click(function () {
@@ -36,10 +36,10 @@
                 var c = rgbToHex(b[5], b[8], b[11]);
 
                 if (c === "#000000") {
-                    select.css("background-color", h_clr);
+                    select.css("background-color", h_clr_22);
                     num++;
                 } else {
-                    select.css("background-color", h_clr);
+                    select.css("background-color", h_clr_22);
                 }
                 var h = parseInt(num / 6);
                 var m = (num % 6) * 10;
@@ -100,6 +100,7 @@
         <div class="d-flex mt-1 ms-3"></div>
         </div>
     </header>
+
     <section class="cont-left">
         <div class="container">
             <div class="d-flex align-items-center mb-2 mt-2">
@@ -112,7 +113,7 @@
 
             <div class="d-flex">
                 <div class="flex-grow-1 bg-light rounded-2 p-2 me-1">
-                    <h3 class="font-monospace">Todos</h3>
+                    <h3 class="font-monospace" style="color: #198754; ">Todos</h3>
                     <div id="todo-list">
                         <div class="
                   task
@@ -126,9 +127,9 @@
                 "></div>
                     </div>
                 </div>
-                <!---->
+                <!--
                 <div class="flex-grow-1 bg-light rounded-2 p-2">
-                    <h3 class="font-monospace">Done</h3>
+                    <h3 class="font-monospace" style="color: #198754; ">Done</h3>
                     <div id="done-list">
                         <div class="
                   task
@@ -141,7 +142,7 @@
                   font-monospace
                 "></div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </section>
@@ -156,21 +157,21 @@
             Done: 2,
         };
 
-        let tasks_21 = [];
+        let tasks = [];
 
         function loadTasks() {
-            let lastTasks = localStorage.getItem("tasks_21");
+            let lastTasks = localStorage.getItem("tasks");
             if (!lastTasks) return;
 
-            tasks_21 = JSON.parse(lastTasks);
-            tasks_21.forEach(addToList);
+            tasks = JSON.parse(lastTasks);
+            tasks.forEach(addToList);
         }
 
         function saveTasks() {
-            localStorage.setItem("tasks_21", JSON.stringify(tasks_21));
+            localStorage.setItem("tasks", JSON.stringify(tasks));
         }
 
-        function addDone(task) {
+     function addDone(task) {
             let div = document.createElement("div");
             div.className =
                 "task bg-light p-1 rounded-2 ps-2 d-flex align-items-center font-monospace";
@@ -186,7 +187,7 @@
 
             buttonRemove.addEventListener("click", () => {
                 div.remove();
-                tasks_21 = tasks_21.filter((t) => t !== task);
+                tasks = tasks.filter((t) => t !== task);
                 saveTasks();
             });
 
@@ -195,6 +196,7 @@
             );
             list.appendChild(div);
         }
+
         function addToList(task) {
             let div = document.createElement("div");
             div.className =
@@ -214,13 +216,15 @@
                 buttonDone.addEventListener("click", () => {
                     /* TODO */
 
-                    tasks_21 = tasks_21.filter((t) => t !== task);
+                    /*tasks = tasks.filter((t) => t !== task);
                     task.type = Type.Done;
-                    tasks_21.push(task);
-                    addDone(task);
-                    div.remove();
+                    tasks.push(task);
+                    addDone(task);saveTasks();
+                    div.remove();*/
 
-                    saveTasks();
+                    //여기다 색상 바꾸는거 구현
+
+                    
                 });
             }
 
@@ -231,7 +235,7 @@
 
             buttonRemove.addEventListener("click", () => {
                 div.remove();
-                tasks_21 = tasks_21.filter((t) => t !== task);
+                tasks = tasks.filter((t) => t !== task);
                 saveTasks();
             });
 
@@ -256,7 +260,7 @@
                 type: Type.Todo,
             };
 
-            tasks_21.push(task);
+            tasks.push(task);
             saveTasks();
 
             addToList(task);
@@ -278,7 +282,7 @@
             };
 
             // 3. Append the new Task object to tasks
-            tasks_21.push(task);
+            tasks.push(task);
             saveTasks();
 
             // 4. Create a new task item and attach it to #todo-list.
