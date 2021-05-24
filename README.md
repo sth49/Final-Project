@@ -1,9 +1,10 @@
 # Study Mate v2.2.0
 
-This is our final project of Open-Source Software Practice.\n
+This is our final project of Open-Source Software Practice.
 Study Mate is a desktop application that records and manages your tasks efficiently.
 
 ## Installation Instruction
+1. 
 
 ## How to use
 
@@ -19,5 +20,7 @@ Study Mate is a desktop application that records and manages your tasks efficien
 
 - Daily planner page
 
+
+![planner](https://user-images.githubusercontent.com/64757426/119368335-dadb2c80-bced-11eb-8cb4-1e5601296d5d.PNG)
 
 여기에 demo video 링크 넣으면 될듯?
