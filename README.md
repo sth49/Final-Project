@@ -1,17 +1,19 @@
-# Study Mate v2.2.0
+# Study Mate v2.1.0
 
 This is our final project of Open-Source Software Practice.
-**Study Mate** is a desktop application that manages your tasks and records time that you've worked
+*Study Mate* is a desktop application that manages your tasks and records time that you've worked
 ------------
 ## Installation Instruction
 1. 
 
 ## How to use
 
-1. Install this *tudy Mate on your laptop, desktop, ...etc using for your task.
-2. Open Desktop app and record your tasks.
-3. After doing your tasks, draw the time using pallete! Study Mate will count the time you have worked
-4. Terminate the 
+1. Install this *Study Mate* desktop application on your laptop, desktop, ...etc using for your task.
+2. Open Desktop app.
+3. In calendar page that you will meet first, write the monthly plan.
+4. To handle your daily tasks, click a 'Go to planner' button in that day and write down all of your tasks. 
+5. After doing your tasks, draw the time using pallete! Study Mate will count the time you have worked
+6. Terminate the application and reactivate it for the next operation. 
 
 ## Example
 - calendar page
