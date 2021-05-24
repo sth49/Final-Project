@@ -18,7 +18,7 @@
   <body>
     <!-- 제일 윗부분 -->
     <header class="mt-2 ms-4">
-        <div class="d-flex justify-content-between">
+        <div class="d-flex">
             <h2 class="text-success">
                 <i class="bi bi-calendar-check"></i>
                 <span class = "font-monospace">STUDY MATE</span>
@@ -36,16 +36,20 @@
     <!-- 오른쪽 -->
     <section class="content-right mb-2">
       <div class="right-main">
-        <button class="planner_button btn btn-success">Daily</button>
+        
         <div class="main-wrap">
           <div class="main-day"></div>
           <div class="main-date"></div>
         </div>
         <div class="todo-wrap">
-          <div class="fs-3 text-success fw-bolder font-monospace">Schedule</div>
+          <div class="d-flex">
+            
+            <button class="planner_button btn btn-outline-success">Go to planner</button>
+          </div>
+          
           <form class="input-form d-flex">
-            <input type="text" placeholder="Add your schedules" class="input-box" />
-            <button type="submit" class="input-btn btn btn-success ms-2 me-2">+</button>
+            <input type="text" placeholder="Schedule" class="input-box" />
+            <button type="submit" class="input-btn btn-sm btn-success ms-2">+</button>
           </form>
           <ul class="todoList"></ul>
           <div class="showList">
