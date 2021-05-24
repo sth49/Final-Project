@@ -2,7 +2,7 @@
 
 This is our final project of Open-Source Software Practice.
 *Study Mate* is a desktop application that manages your tasks and records time that you've worked
-------------
+
 ## Installation Instruction
 1. 
 
