@@ -100,11 +100,9 @@
 
         <div class="d-flex">
             <h2 class="text-success">
-                <i class="bi bi-calendar-check"></i>
+                <button class="btn btn-outline-success ms-3"  onclick="location.href='calendar.html' "><i class="bi bi-calendar-check"></i></button>
                 <span class="font-monospace">STUDY MATE</span>
             </h2>
-
-
 
             <div class="d-flex mt-1 ms-3">
                 <button type="button" class="prev btn btn-outline-success btn-sm ms-1"
@@ -130,10 +128,12 @@
                 <button type="button" id="add" class="btn ms-1 text-nowrap" style="background: #198754; color: white;">
                     <i class="bi bi-plus font-monospace"></i> Add
                 </button>
+                <button type="button" class="btn btn-outline-success fs-5 font-monospace"
+            style="margin: 10px ; margin-left: 5px" onclick="openNav()">Pallete</button>
             </div>
 
             <div class="d-flex">
-                <div class="flex-grow-1 bg-light rounded-2 p-2 me-1">
+                <div class="flex-grow-1 bg-light rounded-2 p-2 me-1 todobox">
                     <h3 class="font-monospace" style="color: #198754; ">Todos</h3>
                     <div id="todo-list">
                         <div class="
@@ -145,6 +145,7 @@
                   d-flex
                   align-items-center
                   font-monospace
+                  todobox
                 "></div>
                     </div>
                 </div>
@@ -181,47 +182,20 @@
         let tasks = [];
 
         function loadTasks() {
-            let lastTasks = localStorage.getItem("tasks");
-            if (!lastTasks) return;
+        let lastTasks = localStorage.getItem("tasks");
+        if (!lastTasks) return;
 
-            tasks = JSON.parse(lastTasks);
-            tasks.forEach(addToList);
-        }
+        tasks = JSON.parse(lastTasks);
+        tasks.forEach(addToList);
+      }
 
-        function saveTasks() {
-            localStorage.setItem("tasks", JSON.stringify(tasks));
-        }
-
-        function addDone(task) {
-            let div = document.createElement("div");
-            div.className =
-                "task bg-light p-1 rounded-2 ps-2 d-flex align-items-center font-monospace";
-
-            let span = document.createElement("span");
-            span.className = "me-auto";
-            span.textContent = task.text;
-            div.appendChild(span);
-            let buttonRemove = document.createElement("button");
-            buttonRemove.className = "btn btn-sm btn-danger";
-            buttonRemove.innerHTML = '<i class="bi bi-x"></i>';
-            div.appendChild(buttonRemove);
-
-            buttonRemove.addEventListener("click", () => {
-                div.remove();
-                tasks = tasks.filter((t) => t !== task);
-                saveTasks();
-            });
-
-            let list = document.querySelector(
-                task.type === Type.Todo ? "#todo-list" : "#done-list"
-            );
-            list.appendChild(div);
-        }
-
+      function saveTasks() {
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+      }
         function addToList(task) {
             let div = document.createElement("div");
             div.className =
-                "task bg-light p-1 rounded-2 ps-2 d-flex align-items-center font-monospace";
+                "task bg-light p-1 rounded-2 ps-2 d-flex align-items-center font-monospace todobox";
 
             let span = document.createElement("span");
             span.className = "me-auto";
@@ -260,9 +234,7 @@
                 saveTasks();
             });
 
-            let list = document.querySelector(
-                task.type === Type.Todo ? "#todo-list" : "#done-list"
-            );
+            let list = document.querySelector("#todo-list");
             list.appendChild(div);
         }
 
@@ -341,10 +313,10 @@
         <div id="print_" class="font-monospace"
             style="color :#198754 ; font-weight:bold; font-size: 25px; margin-left: 10px">Hour
             Minute </div>
-
+        <!--
         <button type="button" class="btn btn-outline-success fs-5 font-monospace"
-            style="margin: 10px ; margin-left: 50px" onclick="openNav()">Open Pallete</button>
-
+            style="margin: 10px ; margin-left: 50px" onclick="openNav()">Pallete</button>
+        -->
         <div class="d-flex">
             <table class="time font-monospace">
                 <tr>
