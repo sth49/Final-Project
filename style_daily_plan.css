@@ -7,6 +7,7 @@ td {
   border: 1px solid #198754;
   width: 30px;
   height: 30px;
+  background-color: #ffffff;
 }
 .d-flex .time {
   text-align: center;
