@@ -21,12 +21,12 @@
     <script type="text/javascript">
         var num = 0;
         var tem;
-        var h_clr_21 = "#ffffff";
+        var h_clr_27 = "#ffffff";
 
         $(document).ready(function () {
 
             $(".colorchip tr td").click(function () {
-                h_clr_21 = $(this).css("background-color"); ///헥사인줄 rbg값이야
+                h_clr_27 = $(this).css("background-color"); ///헥사인줄 rbg값이야
             });
 
             $(".selectTable tbody td").click(function () {
@@ -35,15 +35,15 @@
                 var b = select.css("background-color");
 
                 var c = rgbToHex(b);
-                var d = rgbToHex(h_clr_21);
-                
+                var d = rgbToHex(h_clr_27);
 
-                if (c !== d && c === "#ffffff" && d !== "#NaN"  ) {
-                    select.css("background-color", h_clr_21);
+
+                if (c !== d && c === "#ffffff" && d !== "#NaN") {
+                    select.css("background-color", h_clr_27);
                     num++;
                 }
                 else if (c !== d) {
-                    select.css("background-color", h_clr_21);
+                    select.css("background-color", h_clr_27);
 
                 }
                 var h = parseInt(num / 6);
@@ -100,15 +100,16 @@
 
         <div class="d-flex">
             <h2 class="text-success">
-                <button class="btn btn-outline-success ms-3"  onclick="location.href='calendar.html' "><i class="bi bi-calendar-check"></i></button>
+                <button class="btn btn-outline-success ms-3" onclick="location.href='calendar.html' "><i
+                        class="bi bi-calendar-check"></i></button>
                 <span class="font-monospace">STUDY MATE</span>
             </h2>
 
             <div class="d-flex mt-1 ms-3">
                 <button type="button" class="prev btn btn-outline-success btn-sm ms-1"
-                    onclick="location.href='5.26.html' ">&#60</button>
+                onclick="location.href='5.26.html' ">&#60</button>
                 <span class=" fs-4 font-monospace container-sm" style="color: #198754;font-size: large; ">May
-                    27th</span>
+                    21th</span>
                 <button type="button" class="next btn btn-outline-success btn-sm ms-1"
                     onclick="location.href='5.28.html' ">&#62</button>
             </div>
@@ -129,7 +130,7 @@
                     <i class="bi bi-plus font-monospace"></i> Add
                 </button>
                 <button type="button" class="btn btn-outline-success fs-5 font-monospace"
-            style="margin: 10px ; margin-left: 5px" onclick="openNav()">Pallete</button>
+                    style="margin: 10px ; margin-left: 5px" onclick="openNav()">Pallete</button>
             </div>
 
             <div class="d-flex">
@@ -179,19 +180,20 @@
             Done: 2,
         };
 
-        let tasks_21 = [];
+        let tasks_27 = [];
 
         function loadTasks() {
-        let lastTasks = localStorage.getItem("tasks_21");
-        if (!lastTasks) return;
+            let lastTasks = localStorage.getItem("tasks_27");
+            if (!lastTasks) return;
 
-        tasks_21 = JSON.parse(lastTasks);
-        tasks_21.forEach(addToList);
-      }
+            tasks_27 = JSON.parse(lastTasks);
+            tasks_27.forEach(addToList);
+        }
 
-      function saveTasks() {
-        localStorage.setItem("tasks_21", JSON.stringify(tasks_21));
-      }
+        function saveTasks() {
+            localStorage.setItem("tasks_27", JSON.stringify(tasks_27));
+        }
+        
         function addToList(task) {
             let div = document.createElement("div");
             div.className =
@@ -206,17 +208,17 @@
             buttonDone.className = "btn btn-sm me-1";
             buttonDone.innerHTML = '<i class="bi bi-check"></i>';
             //buttonDone.id = "d" + i; let id = buttonDone.id ;i++;
-           // buttonDone.style.backgroundColor = h_clr_20;
+            // buttonDone.style.backgroundColor = h_clr_20;
             div.appendChild(buttonDone);
-          //  div.append("<div>" + id + "</div>");
+            //  div.append("<div>" + id + "</div>");
 
-            
 
-           buttonDone.addEventListener("click", () => {
-                 buttonDone.style.backgroundColor = h_clr_21;
-                 // div.append("<div>"+buttonDone.id+'1'+"</div>");
-          });
-    
+
+            buttonDone.addEventListener("click", () => {
+                buttonDone.style.backgroundColor = h_clr_27;
+                // div.append("<div>"+buttonDone.id+'1'+"</div>");
+            });
+
 
             let buttonRemove = document.createElement("button");
             buttonRemove.className = "btn btn-sm btn-danger";
@@ -225,7 +227,7 @@
 
             buttonRemove.addEventListener("click", () => {
                 div.remove();
-                tasks_21 = tasks_21.filter((t) => t !== task);
+                tasks_27 = tasks_27.filter((t) => t !== task);
                 saveTasks();
             });
 
@@ -248,7 +250,7 @@
                 type: Type.Todo,
             };
 
-            tasks_21.push(task);
+            tasks_27.push(task);
             saveTasks();
 
             addToList(task);
@@ -270,7 +272,7 @@
             };
 
             // 3. Append the new Task object to tasks
-            tasks_21.push(task);
+            tasks_27.push(task);
             saveTasks();
 
             // 4. Create a new task item and attach it to #todo-list.
