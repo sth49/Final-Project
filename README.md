@@ -8,7 +8,7 @@ This is our final project of Open-Source Software Practice.
 
 
 ## Installation Instruction
-1. In latest release part, download a zip file 'study-mate-win32-x64.zip'
+1. Download a zip file 'study-mate-win32-x64.zip' from latest release part
 2. Extract the zip file
 3. Run a desktop app 'study-mate.exe'
 
@@ -35,7 +35,7 @@ This is our final project of Open-Source Software Practice.
 
 * Click this link to see example about application
 
-https://www.youtube.com/embed/dIn3WZuS5eg
+https://youtu.be/dIn3WZuS5eg
 
 ## Members
 
