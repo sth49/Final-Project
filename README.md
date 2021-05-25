@@ -27,7 +27,7 @@ __Study Mate__ is a desktop application that manages your tasks and records time
 
 - Daily planner page
 
+![planner](https://user-images.githubusercontent.com/64757426/119454195-3ef40400-bd73-11eb-969f-f2d6a1d3f02c.PNG)
 
-![planner](https://user-images.githubusercontent.com/64757426/119368335-dadb2c80-bced-11eb-8cb4-1e5601296d5d.PNG)
 
 여기에 demo video 링크 넣으면 될듯?
