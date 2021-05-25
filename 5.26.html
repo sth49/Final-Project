@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Daily_plan</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+
+    <link rel="stylesheet" href="style_daily_plan.css" />
+
+    <script src="http://code.jquery.com/jquery-1.4.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        var num = 0;
+        var tem;
+        var h_clr_21 = "#ffffff";
+
+        $(document).ready(function () {
+
+            $(".colorchip tr td").click(function () {
+                h_clr_21 = $(this).css("background-color"); ///헥사인줄 rbg값이야
+            });
+
+            $(".selectTable tbody td").click(function () {
+                var select = $(this);
+
+                var b = select.css("background-color");
+
+                var c = rgbToHex(b);
+                var d = rgbToHex(h_clr_21);
+                
+
+                if (c !== d && c === "#ffffff" && d !== "#NaN"  ) {
+                    select.css("background-color", h_clr_21);
+                    num++;
+                }
+                else if (c !== d) {
+                    select.css("background-color", h_clr_21);
+
+                }
+                var h = parseInt(num / 6);
+                var m = (num % 6) * 10;
+
+                var time = String(h) + " Hour " + String(m) + " Minute";
+                document.getElementById("print_").innerHTML = time;
+            });
+        });
+
+        function rgbToHex(rgbType) {
+            /* 
+            ** 컬러값과 쉼표만 남기고 삭제하기. 
+            ** 쉼표(,)를 기준으로 분리해서, 배열에 담기. 
+            */
+            var rgb = rgbType.replace(/[^%,.\d]/g, "").split(",");
+
+            rgb.forEach(function (str, x, arr) {
+
+                /* 컬러값이 "%"일 경우, 변환하기. */
+
+
+                /* 16진수 문자로 변환하기. */
+                str = parseInt(str, 10).toString(16);
+                if (str.length === 1) str = "0" + str;
+
+                arr[x] = str;
+            });
+
+
+            return "#" + rgb.join("");
+        }
+    </script>
+
+    <style>
+
+    </style>
+
+    <script>
+        /* Set the width of the side navigation to 250px */
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "200px";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+</head>
+
+<body>
+    <header class="mt-2 ms-4">
+
+        <div class="d-flex">
+            <h2 class="text-success">
+                <button class="btn btn-outline-success ms-3"  onclick="location.href='calendar.html' "><i class="bi bi-calendar-check"></i></button>
+                <span class="font-monospace">STUDY MATE</span>
+            </h2>
+
+            <div class="d-flex mt-1 ms-3">
+                <button type="button" class="prev btn btn-outline-success btn-sm ms-1"
+                    onclick="location.href='5.20.html' ">&#60</button>
+                <span class=" fs-4 font-monospace container-sm" style="color: #198754;font-size: large; ">May
+                    26th</span>
+                <button type="button" class="next btn btn-outline-success btn-sm ms-1"
+                    onclick="location.href='5.27.html' ">&#62</button>
+            </div>
+
+
+
+        </div>
+        <div class="d-flex mt-1 ms-3"></div>
+        </div>
+    </header>
+
+    <section class="cont-left">
+        <div class="container">
+            <div class="d-flex align-items-center mb-2 mt-2">
+                <input type="text" class="form-control font-monospace" id="task-input" placeholder="Enter the task"
+                    onkeypress="if(event.keyCode == 13) enter();" />
+                <button type="button" id="add" class="btn ms-1 text-nowrap" style="background: #198754; color: white;">
+                    <i class="bi bi-plus font-monospace"></i> Add
+                </button>
+                <button type="button" class="btn btn-outline-success fs-5 font-monospace"
+            style="margin: 10px ; margin-left: 5px" onclick="openNav()">Pallete</button>
+            </div>
+
+            <div class="d-flex">
+                <div class="flex-grow-1 bg-light rounded-2 p-2 me-1 todobox">
+                    <h3 class="font-monospace" style="color: #198754; ">Todos</h3>
+                    <div id="todo-list">
+                        <div class="
+                  task
+                  bg-light
+                  p-1
+                  rounded-2
+                  ps-2
+                  d-flex
+                  align-items-center
+                  font-monospace
+                  todobox
+                "></div>
+                    </div>
+                </div>
+                <!--
+                <div class="flex-grow-1 bg-light rounded-2 p-2">
+                    <h3 class="font-monospace" style="color: #198754; ">Done</h3>
+                    <div id="done-list">
+                        <div class="
+                  task
+                  bg-light
+                  p-1
+                  rounded-2
+                  ps-2
+                  d-flex
+                  align-items-center
+                  font-monospace
+                "></div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+        crossorigin="anonymous"></script>
+
+    <script>
+        const Type = {
+            Todo: 1,
+            Done: 2,
+        };
+
+        let tasks_21 = [];
+
+        function loadTasks() {
+        let lastTasks = localStorage.getItem("tasks_21");
+        if (!lastTasks) return;
+
+        tasks_21 = JSON.parse(lastTasks);
+        tasks_21.forEach(addToList);
+      }
+
+      function saveTasks() {
+        localStorage.setItem("tasks_21", JSON.stringify(tasks_21));
+      }
+        function addToList(task) {
+            let div = document.createElement("div");
+            div.className =
+                "task bg-light p-1 rounded-2 ps-2 d-flex align-items-center font-monospace todobox";
+
+            let span = document.createElement("span");
+            span.className = "me-auto";
+            span.textContent = task.text;
+            div.appendChild(span);
+
+            let buttonDone = document.createElement("button");
+            buttonDone.className = "btn btn-sm me-1";
+            buttonDone.innerHTML = '<i class="bi bi-check"></i>';
+            //buttonDone.id = "d" + i; let id = buttonDone.id ;i++;
+           // buttonDone.style.backgroundColor = h_clr_20;
+            div.appendChild(buttonDone);
+          //  div.append("<div>" + id + "</div>");
+
+            
+
+           buttonDone.addEventListener("click", () => {
+                 buttonDone.style.backgroundColor = h_clr_21;
+                 // div.append("<div>"+buttonDone.id+'1'+"</div>");
+          });
+    
+
+            let buttonRemove = document.createElement("button");
+            buttonRemove.className = "btn btn-sm btn-danger";
+            buttonRemove.innerHTML = '<i class="bi bi-x"></i>';
+            div.appendChild(buttonRemove);
+
+            buttonRemove.addEventListener("click", () => {
+                div.remove();
+                tasks_21 = tasks_21.filter((t) => t !== task);
+                saveTasks();
+            });
+
+            let list = document.querySelector("#todo-list");
+            list.appendChild(div);
+        }
+
+        window.addEventListener("load", () => {
+            loadTasks();
+        });
+
+        function enter() {
+            let input = document.querySelector("#task-input");
+            let text = input.value;
+
+            if (!text.length) return;
+
+            let task = {
+                text: text,
+                type: Type.Todo,
+            };
+
+            tasks_21.push(task);
+            saveTasks();
+
+            addToList(task);
+
+            input.value = "";
+        }
+        let button = document.querySelector("#add");
+        button.addEventListener("click", () => {
+            // 1. Read the text in #task-input.
+            let input = document.querySelector("#task-input");
+            let text = input.value;
+
+            if (!text.length) return;
+
+            // 2. Create a new Task object.
+            let task = {
+                text: text,
+                type: Type.Todo,
+            };
+
+            // 3. Append the new Task object to tasks
+            tasks_21.push(task);
+            saveTasks();
+
+            // 4. Create a new task item and attach it to #todo-list.
+            addToList(task);
+
+            // 5. Clear #task-input.
+            input.value = "";
+        });
+    </script>
+    <section class="cont-right">
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <span class="font-monospace" style="color :#198754 ; font-weight:bold; font-size: large; margin: 20px; ">
+                Pastel Pallete</span>
+            <table class="colorchip" style="margin-left: 20px;">
+                <tr>
+                    <td style="background-color: #eef2ff"></td>
+                    <td style="background-color: #ffd9f5"></td>
+                    <td style="background-color: #fbeeff"></td>
+                    <td style="background-color: #fff8e6"></td>
+                    <td style="background-color: #ffcde2"></td>
+                </tr>
+                <tr>
+                    <td style="background-color: #b6e3e9"></td>
+                    <td style="background-color: #c4e1ff"></td>
+                    <td style="background-color: #9ad6fb"></td>
+                    <td style="background-color: #d9d9ff"></td>
+                    <td style="background-color: #ebcaff"></td>
+
+                </tr>
+            </table>
+        </div>
+
+
+        <div id="print_" class="font-monospace"
+            style="color :#198754 ; font-weight:bold; font-size: 25px; margin-left: 10px">Hour
+            Minute </div>
+        <!--
+        <button type="button" class="btn btn-outline-success fs-5 font-monospace"
+            style="margin: 10px ; margin-left: 50px" onclick="openNav()">Pallete</button>
+        -->
+        <div class="d-flex">
+            <table class="time font-monospace">
+                <tr>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                </tr>
+            </table>
+            <table class="selectTable">
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+
+</html>
