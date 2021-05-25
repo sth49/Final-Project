@@ -21,12 +21,12 @@
         <script type="text/javascript">
             var num = 0;
             var tem;
-            var h_clr_22 = "#ffffff";
+            var h_clr_20 = "#ffffff";
     
             $(document).ready(function () {
     
                 $(".colorchip tr td").click(function () {
-                    h_clr_22 = $(this).css("background-color"); ///헥사인줄 rbg값이야
+                    h_clr_20 = $(this).css("background-color"); ///헥사인줄 rbg값이야
                 });
     
                 $(".selectTable tbody td").click(function () {
@@ -35,15 +35,15 @@
                     var b = select.css("background-color");
     
                     var c = rgbToHex(b);
-                    var d = rgbToHex(h_clr_22);
+                    var d = rgbToHex(h_clr_20);
                     
     
                     if (c !== d && c === "#ffffff" && d !== "#NaN"  ) {
-                        select.css("background-color", h_clr_22);
+                        select.css("background-color", h_clr_20);
                         num++;
                     }
                     else if (c !== d) {
-                        select.css("background-color", h_clr_22);
+                        select.css("background-color", h_clr_20);
     
                     }
                     var h = parseInt(num / 6);
@@ -141,7 +141,7 @@
                 "></div>
                     </div>
                 </div>
-                <!---->
+                <!--
                 <div class="flex-grow-1 bg-light rounded-2 p-2">
                     <h3 class="font-monospace" style="color: #198754; ">Done</h3>
                     <div id="done-list">
@@ -156,7 +156,7 @@
                   font-monospace
                 "></div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </section>
@@ -220,24 +220,21 @@
             span.textContent = task.text;
             div.appendChild(span);
 
-            if (task.type === Type.Todo) {
-                let buttonDone = document.createElement("button");
-                buttonDone.className = "btn btn-sm btn-success me-1";
-                buttonDone.innerHTML = '<i class="bi bi-check"></i>';
-                div.appendChild(buttonDone);
+            let buttonDone = document.createElement("button");
+            buttonDone.className = "btn btn-sm me-1";
+            buttonDone.innerHTML = '<i class="bi bi-check"></i>';
+            //buttonDone.id = "d" + i; let id = buttonDone.id ;i++;
+           // buttonDone.style.backgroundColor = h_clr_20;
+            div.appendChild(buttonDone);
+          //  div.append("<div>" + id + "</div>");
 
-                buttonDone.addEventListener("click", () => {
-                    /* TODO */
+            
 
-                    tasks = tasks.filter((t) => t !== task);
-                    task.type = Type.Done;
-                    tasks.push(task);
-                    addDone(task);
-                    div.remove();
-
-                    saveTasks();
-                });
-            }
+           buttonDone.addEventListener("click", () => {
+                 buttonDone.style.backgroundColor = h_clr_20;
+                 // div.append("<div>"+buttonDone.id+'1'+"</div>");
+          });
+    
 
             let buttonRemove = document.createElement("button");
             buttonRemove.className = "btn btn-sm btn-danger";
