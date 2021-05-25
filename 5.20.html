@@ -18,62 +18,75 @@
         integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
         crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
-        var num = 0;
-        var tem;
-        var h_clr;
-
-        $(document).ready(function () {
-            $(".colorchip tr td").click(function () {
-                h_clr = $(this).css("background-color");
+        <script type="text/javascript">
+            var num = 0;
+            var tem;
+            var h_clr_22 = "#ffffff";
+    
+            $(document).ready(function () {
+    
+                $(".colorchip tr td").click(function () {
+                    h_clr_22 = $(this).css("background-color"); ///헥사인줄 rbg값이야
+                });
+    
+                $(".selectTable tbody td").click(function () {
+                    var select = $(this);
+    
+                    var b = select.css("background-color");
+    
+                    var c = rgbToHex(b);
+                    var d = rgbToHex(h_clr_22);
+                    
+    
+                    if (c !== d && c === "#ffffff" && d !== "#NaN"  ) {
+                        select.css("background-color", h_clr_22);
+                        num++;
+                    }
+                    else if (c !== d) {
+                        select.css("background-color", h_clr_22);
+    
+                    }
+                    var h = parseInt(num / 6);
+                    var m = (num % 6) * 10;
+    
+                    var time = String(h) + " Hour " + String(m) + " Minute";
+                    document.getElementById("print_").innerHTML = time;
+                });
             });
-
-            $(".selectTable tbody td").click(function () {
-                var select = $(this);
-
-                var b = select.css("background-color");
-
-                var c = rgbToHex(b[5], b[8], b[11]);
-
-                if (c === "#000000") {
-                    select.css("background-color", h_clr);
-                    num++;
-                } else {
-                    select.css("background-color", h_clr);
-                }
-                var h = parseInt(num / 6);
-                var m = (num % 6) * 10;
-
-                var time = String(h) + " Hour " + String(m) + " Minute";
-                document.getElementById("print_").innerHTML = time;
-            });
-        });
-
-        function componentToHex(c) {
-            var hex = c.toString(16);
-            return hex.length == 1 ? "0" + hex : hex;
-        }
-
-        function rgbToHex(r, g, b) {
-            return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-        }
-    </script>
-
-    <style>
-
-    </style>
-
-    <script>
-        /* Set the width of the side navigation to 250px */
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "200px";
-        }
-
-        /* Set the width of the side navigation to 0 */
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-        }
-    </script>
+    
+            function rgbToHex(rgbType) {
+                /* 
+                ** 컬러값과 쉼표만 남기고 삭제하기. 
+                ** 쉼표(,)를 기준으로 분리해서, 배열에 담기. 
+                */
+                var rgb = rgbType.replace(/[^%,.\d]/g, "").split(",");
+    
+                rgb.forEach(function (str, x, arr) {
+    
+                    /* 컬러값이 "%"일 경우, 변환하기. */
+    
+    
+                    /* 16진수 문자로 변환하기. */
+                    str = parseInt(str, 10).toString(16);
+                    if (str.length === 1) str = "0" + str;
+    
+                    arr[x] = str;
+                });
+    
+    
+                return "#" + rgb.join("");
+            }
+      
+            /* Set the width of the side navigation to 250px */
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "200px";
+            }
+    
+            /* Set the width of the side navigation to 0 */
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+            }
+        </script>
 </head>
 
 <body>
@@ -105,14 +118,14 @@
             <div class="d-flex align-items-center mb-2 mt-2">
                 <input type="text" class="form-control font-monospace" id="task-input" placeholder="Enter the task"
                     onkeypress="if(event.keyCode == 13) enter();" />
-                <button type="button" id="add" class="btn ms-1 text-nowrap" style="background: #198754; color: white;">
-                    <i class="bi bi-plus font-monospace"></i> Add
+                <button type="button" id="add" class="btn ms-1 text-nowrap" style="background: #198754; color: white;" >
+                    <i class="bi bi-plus font-monospace" ></i> Add
                 </button>
             </div>
 
             <div class="d-flex">
                 <div class="flex-grow-1 bg-light rounded-2 p-2 me-1">
-                    <h3 class="font-monospace">Todos</h3>
+                    <h3 class="font-monospace" style="color: #198754; ">Todos</h3>
                     <div id="todo-list">
                         <div class="
                   task
@@ -128,7 +141,7 @@
                 </div>
                 <!---->
                 <div class="flex-grow-1 bg-light rounded-2 p-2">
-                    <h3 class="font-monospace">Done</h3>
+                    <h3 class="font-monospace" style="color: #198754; ">Done</h3>
                     <div id="done-list">
                         <div class="
                   task
@@ -156,18 +169,18 @@
             Done: 2,
         };
 
-        let tasks_20 = [];
+        let tasks = [];
 
         function loadTasks() {
-            let lastTasks = localStorage.getItem("tasks_20");
+            let lastTasks = localStorage.getItem("tasks");
             if (!lastTasks) return;
 
-            tasks_20 = JSON.parse(lastTasks);
-            tasks_20.forEach(addToList);
+            tasks = JSON.parse(lastTasks);
+            tasks.forEach(addToList);
         }
 
         function saveTasks() {
-            localStorage.setItem("tasks_20", JSON.stringify(tasks_20));
+            localStorage.setItem("tasks", JSON.stringify(tasks));
         }
 
         function addDone(task) {
@@ -186,7 +199,7 @@
 
             buttonRemove.addEventListener("click", () => {
                 div.remove();
-                tasks_20 = tasks_20.filter((t) => t !== task);
+                tasks = tasks.filter((t) => t !== task);
                 saveTasks();
             });
 
@@ -214,9 +227,9 @@
                 buttonDone.addEventListener("click", () => {
                     /* TODO */
 
-                    tasks_20 = tasks_20.filter((t) => t !== task);
+                    tasks = tasks.filter((t) => t !== task);
                     task.type = Type.Done;
-                    tasks_20.push(task);
+                    tasks.push(task);
                     addDone(task);
                     div.remove();
 
@@ -231,7 +244,7 @@
 
             buttonRemove.addEventListener("click", () => {
                 div.remove();
-                tasks_20 = tasks_20.filter((t) => t !== task);
+                tasks = tasks.filter((t) => t !== task);
                 saveTasks();
             });
 
@@ -256,7 +269,7 @@
                 type: Type.Todo,
             };
 
-            tasks_20.push(task);
+            tasks.push(task);
             saveTasks();
 
             addToList(task);
@@ -278,7 +291,7 @@
             };
 
             // 3. Append the new Task object to tasks
-            tasks_20.push(task);
+            tasks.push(task);
             saveTasks();
 
             // 4. Create a new task item and attach it to #todo-list.
