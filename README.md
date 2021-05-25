@@ -33,5 +33,6 @@ This is our final project of Open-Source Software Practice.
 
 ## Demo Video
 
+* Click this link to see example about application
 
 https://www.youtube.com/embed/dIn3WZuS5eg
