@@ -35,7 +35,7 @@ This is our final project of Open-Source Software Practice.
 
 * Click this link to see example about application
 
-https://youtu.be/dIn3WZuS5eg
+  * https://youtu.be/dIn3WZuS5eg
 
 ## Members
 
