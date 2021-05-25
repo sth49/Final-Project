@@ -36,3 +36,8 @@ This is our final project of Open-Source Software Practice.
 * Click this link to see example about application
 
 https://www.youtube.com/embed/dIn3WZuS5eg
+
+## Members
+
+Minyeeun - Yeeun Min (mye04123@naver.com)
+sth49 - Donghee Hong (ghdehdgml12345@naver.com)
