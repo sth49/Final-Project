@@ -179,18 +179,18 @@
             Done: 2,
         };
 
-        let tasks = [];
+        let tasks_21 = [];
 
         function loadTasks() {
-        let lastTasks = localStorage.getItem("tasks");
+        let lastTasks = localStorage.getItem("tasks_21");
         if (!lastTasks) return;
 
-        tasks = JSON.parse(lastTasks);
-        tasks.forEach(addToList);
+        tasks_21 = JSON.parse(lastTasks);
+        tasks_21.forEach(addToList);
       }
 
       function saveTasks() {
-        localStorage.setItem("tasks", JSON.stringify(tasks));
+        localStorage.setItem("tasks_21", JSON.stringify(tasks_21));
       }
         function addToList(task) {
             let div = document.createElement("div");
@@ -225,7 +225,7 @@
 
             buttonRemove.addEventListener("click", () => {
                 div.remove();
-                tasks = tasks.filter((t) => t !== task);
+                tasks_21 = tasks_21.filter((t) => t !== task);
                 saveTasks();
             });
 
@@ -248,7 +248,7 @@
                 type: Type.Todo,
             };
 
-            tasks.push(task);
+            tasks_21.push(task);
             saveTasks();
 
             addToList(task);
@@ -270,7 +270,7 @@
             };
 
             // 3. Append the new Task object to tasks
-            tasks.push(task);
+            tasks_21.push(task);
             saveTasks();
 
             // 4. Create a new task item and attach it to #todo-list.
