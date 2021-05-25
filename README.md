@@ -1,4 +1,4 @@
-# Study Mate v2.1.0
+# Study Mate v3.0.0
 
 This is our final project of Open-Source Software Practice.
 
