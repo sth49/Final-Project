@@ -32,4 +32,6 @@ This is our final project of Open-Source Software Practice.
 ![planner](https://user-images.githubusercontent.com/64757426/119454195-3ef40400-bd73-11eb-969f-f2d6a1d3f02c.PNG)
 
 ## Demo Vido
-여기에 demo video 링크 넣으면 될듯?
+
+
+<iframe width="640" height="360" src="https://www.youtube.com/embed/6Az2cNU7gUw" frameborder="0" gesture="media" allowfullscreen=""></iframe>
